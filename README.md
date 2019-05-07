@@ -28,7 +28,7 @@ options::initialize(argc, argv);
 
 // default value will be used if this option is not specified
 int default_value = 10;
-int m = options::next_int("-m", "--m_value", "Description of the value.", 10);
+int m = options::next_int("-m", "--m_value", "Description of the value.", default_value);
 ```
 There is also a small example that reads 2 ints from the command-line and outputs them. The example can be run within build folder as:
 ```bash
