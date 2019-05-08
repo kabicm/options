@@ -21,7 +21,7 @@ if (CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
 endif ()
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
+# include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 add_subdirectory(src)
 add_subdirectory(examples)
