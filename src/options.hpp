@@ -32,4 +32,6 @@ namespace options {
 
     double next_double(const std::string& short_flag, const std::string& long_flag,
                  const std::string& message, double default_value);
+
+    bool flag_exists(const std::string& short_flag, const std::string& long_flag);
 };

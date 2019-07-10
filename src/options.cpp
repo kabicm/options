@@ -114,3 +114,12 @@ double options::next_double(const std::string& short_flag, const std::string& lo
     }
 }
 
+bool options::flag_exists(const std::string& short_flag, const std::string& long_flag) {
+    try {
+        auto it = options::find_flag(short_flag, long_flag, "", command_line);
+        return options::flag_exists(short_flag, long_flag, command_line);
+    } catch (const std::runtime_error& e) {
+        return false;
+    }
+}
+
