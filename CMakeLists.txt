@@ -15,7 +15,7 @@ add_library(options SHARED ${options_SOURCE_DIR}/src/options.cpp)
 target_include_directories(options PUBLIC 
   $<BUILD_INTERFACE:${options_SOURCE_DIR}/src>
   )
-target_compile_features(cosma PUBLIC cxx_std_11)
+target_compile_features(options PUBLIC cxx_std_11)
 
 if(OPTIONS_NOT_SUBPROJECT)
   install(TARGETS options
