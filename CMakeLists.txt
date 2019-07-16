@@ -18,27 +18,29 @@ target_include_directories(options PUBLIC
 target_compile_features(options PUBLIC cxx_std_11)
 
 if(OPTIONS_NOT_SUBPROJECT)
+  include(GNUInstallDirs)
+  include(CMakePackageConfigHelpers)
+
   install(TARGETS options
           EXPORT options_targets 
-          LIBRARY DESTINATION lib
-          INCLUDES DESTINATION include)
+          LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+          INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
   install(EXPORT options_targets
           FILE optionsConfig.cmake
           NAMESPACE options::
-          DESTINATION lib/cmake/options)
+          DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/options")
 
   install(FILES src/options.hpp
-          DESTINATION include)
+          DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
-  include(CMakePackageConfigHelpers)
   write_basic_package_version_file(
     "${options_BINARY_DIR}/optionsConfigVersion.cmake"
     VERSION ${options_VERSION}
     COMPATIBILITY SameMajorVersion)
 
   install(FILES "${options_BINARY_DIR}/optionsConfigVersion.cmake"
-          DESTINATION lib/cmake/options)
+          DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/options")
 endif()
 
 if(OPTIONS_NOT_SUBPROJECT)
