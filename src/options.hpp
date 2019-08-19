@@ -34,4 +34,9 @@ namespace options {
                  const std::string& message, double default_value);
 
     bool flag_exists(const std::string& short_flag, const std::string& long_flag);
+
+    std::pair<int, int> next_int_pair(const std::string& short_flag,
+                                      const std::string& long_flag,
+                                      const std::string& message,
+                                      int default_value);
 };
