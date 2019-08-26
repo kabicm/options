@@ -12,7 +12,12 @@ int options::find_flag(const std::string& short_flag, const std::string& long_fl
         const std::string& message, const std::string& line, bool compulsory) {
     auto position = line.find(short_flag);
     auto length = short_flag.length();
-    if (position == std::string::npos) {
+    if (position == std::string::npos
+            // check if it is not some other long flag
+            // with same starting letter
+            || (position > 0 && 
+                line[position] == '-' &&
+                line[position-1] == '-')) {
         position = line.find(long_flag);
         length = long_flag.length();
         if (position == std::string::npos) {
@@ -120,6 +125,25 @@ bool options::flag_exists(const std::string& short_flag, const std::string& long
         return options::flag_exists(short_flag, long_flag, command_line);
     } catch (const std::runtime_error& e) {
         return false;
+    }
+}
+
+std::pair<int, int> options::next_int_pair(
+        const std::string& short_flag,
+        const std::string& long_flag,
+        const std::string& message,
+        int default_value) {
+    try {
+        auto it = options::find_flag(short_flag, long_flag, message, command_line);
+        std::size_t delimiter_found = command_line.find('x', it);
+        if (delimiter_found != std::string::npos) {
+            int first = next_int(it, command_line);
+            int second = next_int(delimiter_found+1, command_line);
+            return {first, second};
+        }
+        return {default_value, default_value};
+    } catch (const std::runtime_error& e) {
+        return {default_value, default_value};
     }
 }
 
