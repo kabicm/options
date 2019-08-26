@@ -11,15 +11,17 @@ option(OPTIONS_WITH_INSTALL "Enable installation." ${MASTER_PROJECT})
 project(options VERSION 1.0 LANGUAGES CXX)
 
 if(NOT CMAKE_BUILD_TYPE)
-  message(STATUS "Setting build type to Release as none was specified.")
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY VALUE "Release")
+    message(STATUS "Setting build type to Release as none was specified.")
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY VALUE "Release")
 endif()
 
-add_library(options SHARED ${options_SOURCE_DIR}/src/options.cpp)
-target_include_directories(options PUBLIC 
-  $<BUILD_INTERFACE:${options_SOURCE_DIR}/src>
-  )
-target_compile_features(options PUBLIC cxx_std_11)
+if(NOT TARGET options)
+    add_library(options SHARED ${options_SOURCE_DIR}/src/options.cpp)
+    target_include_directories(options PUBLIC 
+      $<BUILD_INTERFACE:${options_SOURCE_DIR}/src>
+      )
+    target_compile_features(options PUBLIC cxx_std_11)
+endif()
 
 if(OPTIONS_WITH_INSTALL)
     include(GNUInstallDirs)
