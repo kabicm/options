@@ -16,7 +16,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 if(NOT TARGET options)
-    add_library(options SHARED ${options_SOURCE_DIR}/src/options.cpp)
+    add_library(options STATIC ${options_SOURCE_DIR}/src/options.cpp)
     target_include_directories(options PUBLIC 
       $<BUILD_INTERFACE:${options_SOURCE_DIR}/src>
       )
