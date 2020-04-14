@@ -7,6 +7,7 @@ endif()
 
 option(OPTIONS_WITH_EXAMPLES "Enable examples." ${MASTER_PROJECT})
 option(OPTIONS_WITH_INSTALL "Enable installation." ${MASTER_PROJECT})
+option(BUILD_SHARED_LIBS "Build shared libraries." OFF)
 
 project(options VERSION 1.0 LANGUAGES CXX)
 
@@ -16,7 +17,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 if(NOT TARGET options)
-    add_library(options STATIC ${options_SOURCE_DIR}/src/options.cpp)
+    add_library(options ${options_SOURCE_DIR}/src/options.cpp)
     target_include_directories(options PUBLIC 
       $<BUILD_INTERFACE:${options_SOURCE_DIR}/src>
       )
